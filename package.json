@@ -1,0 +1,31 @@
+{
+  "name": "@pksung1/beakjoon-nodejs-cli",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "module": "module",
+  "private": "false",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "bjc": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "@babel/generator": "^7.28.5",
+    "@babel/parser": "^7.28.5",
+    "@babel/traverse": "^7.28.5",
+    "clipboardy": "^5.0.0",
+    "prettier": "^3.6.2",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.12",
+    "fs-extra": "^11.3.2"
+  }
+}
