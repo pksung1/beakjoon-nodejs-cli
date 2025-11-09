@@ -5,6 +5,7 @@ import path from 'path';
 import clipboardy from 'clipboardy';
 import removeConsoleLogs from './utils/remove-console.js';
 import { exit } from 'process';
+import { execSync } from 'child_process';
 
 import { fileURLToPath } from 'url';
 
@@ -23,11 +24,17 @@ const argv = yargs(hideBin(process.argv))
     type: 'boolean',
     description: '클립보드에 정답 복사'
   })
+  .option('test', {
+    alias: 't',
+    type: 'boolean',
+    description: '테스트 실행'
+  })
   .argv
 
 
 const q = argv.question
 const isCopy = argv.copy
+const isTest = argv.test
 
 const copyPaths = {
   'js': path.join(process.cwd(), `${q}.js`),
@@ -54,6 +61,20 @@ ${prefix}
 
 ${formatted}
 `)
+
+  exit(1);
+}
+
+if (isTest) {
+  // child_process를 추가해 해당문제의 node test를 실행한다
+  
+  const executeTestPath = path.join(process.cwd(), `${q}.test.js`);
+  const output = await execSync(`node --no-warnings --test ${executeTestPath}`, {
+    encoding: 'utf-8',
+    env: { ...process.env, FORCE_COLOR: '1' }  // 색상 강제
+  })
+
+  console.log(output.toString())
 
   exit(1);
 }
