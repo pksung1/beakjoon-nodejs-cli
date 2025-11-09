@@ -1,17 +1,20 @@
 {
   "name": "@pksung1/beakjoon-nodejs-cli",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.2",
+  "description": "백준 풀이를 위한 CLI",
   "license": "ISC",
-  "author": "",
+  "author": "pksung1",
   "main": "index.js",
   "module": "module",
-  "private": "false",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "bin": {
     "bjc": "dist/cli.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "node build.js"

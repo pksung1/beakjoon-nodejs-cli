@@ -9,12 +9,12 @@ esbuild.build({
   target: 'node18',
   format: 'esm',
   outfile: 'dist/cli.js',
-  external: [], // 모든 dependencies 번들링
   minify: false, // CLI는 minify 안 해도 됨
   sourcemap: true,
   banner: {
     js: '#!/usr/bin/env node\n'
-  }
+  },
+  packages: 'external', // 모든 dependencies를 번들링하지 않음
 }).catch(() => process.exit(1));
 
 
