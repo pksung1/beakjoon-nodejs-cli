@@ -69,14 +69,26 @@ if (isTest) {
   // child_process를 추가해 해당문제의 node test를 실행한다
   
   const executeTestPath = path.join(process.cwd(), `${q}.test.js`);
-  const output = await execSync(`node --no-warnings --test ${executeTestPath}`, {
-    encoding: 'utf-8',
-    env: { ...process.env, FORCE_COLOR: '1' }  // 색상 강제
-  })
 
-  console.log(output.toString())
+  try {
+    const output = execSync(
+      `node --no-warnings --stack-trace-limit=0 --test ${executeTestPath}`,
+      {
+        encoding: 'utf-8',
+        env: { ...process.env, FORCE_COLOR: '1' },
+        stdio: 'pipe' // stdout, stderr를 캡처
+      }
+    );
+    
+    console.log(output); // 테스트 성공
+    process.exit(0); // 성공 종료
+    
+  } catch (error) {
+    // 테스트 실패 시
+    console.error(error.stdout || error.message);
+    process.exit(1); // 실패 종료
+  }
 
-  exit(1);
 }
 
 // 파일생성

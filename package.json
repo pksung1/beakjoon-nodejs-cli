@@ -1,6 +1,6 @@
 {
   "name": "@pksung1/beakjoon-nodejs-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "백준 풀이를 위한 CLI",
   "license": "ISC",
   "author": "pksung1",
